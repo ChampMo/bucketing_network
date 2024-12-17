@@ -12,7 +12,9 @@ export default function ExamplePage( ) {
     const [isChecked, setIsChecked] = useState(false); // สร้าง state สำหรับ checkbox
 
     const [result, setResult] = useState(null);
-    const [title, setTitle] = useState(null);
+    const [title, setTitle] = useState('Select a sorting method');
+    const [newProductName, setNewProductName] = useState(null);
+    const [newProductPrice, setNewProductPrice] = useState(null);
 
     const handleCheckboxChange = (e) => {
       setIsChecked(e.target.checked); // อัปเดตสถานะจากการกด checkbox
@@ -49,6 +51,7 @@ export default function ExamplePage( ) {
 
         const resetResult = () => {
             setResult(null);
+            setTitle('Select a sorting method');
         }
 
 
@@ -64,11 +67,12 @@ export default function ExamplePage( ) {
             });
 
             const result = await response.json();
-            console.log('------------',result);
+            console.log(result);
 
             if (result) {
             console.log("Data successfully sent!");
             setResult(result);
+            setTitle('Products sort by name');
             } else {
             console.error("Failed to send data:", result.message);
             }
@@ -97,11 +101,26 @@ export default function ExamplePage( ) {
             if (result) {
             console.log("Data successfully sent!");
             setResult(result);
+            setTitle('Products sort by price');
             } else {
             console.error("Failed to send data:", result.message);
             }
         } catch (error) {
             console.error("Error sending products:", error);
+        }
+        };
+        
+
+    const handleAddProduct = () => {
+        // ตรวจสอบว่ามีค่าชื่อและราคา
+        if (newProductName.trim() !== "" && newProductPrice !== "") {
+            const newProduct = {
+            name: newProductName,
+            price: parseFloat(newProductPrice), // แปลงเป็น number
+            };
+            setProducts([newProduct, ...products]); // ใส่ newProduct เป็นตัวแรกใน array
+            setNewProductName(""); // เคลียร์ช่อง Name
+            setNewProductPrice(""); // เคลียร์ช่อง Price
         }
         };
         
@@ -114,13 +133,30 @@ export default function ExamplePage( ) {
                 className=" cursor-pointer" 
                 icon="lets-icons:sort-random-light" width="24" height="24" />
             </h1>
-            <div className='bg-white px-4 rounded-lg shadow-md h-[800px] overflow-y-auto max-w-96 w-full slide'>
+            <div className=" text-sm">Add item</div>
+            <div className="flex justify-between my-2 gap-1">
+                <input 
+                placeholder="Name"
+                value={newProductName} // ผูกค่า state กับ value ของ input
+                onChange={(e) => setNewProductName(e.target.value)} // อัปเดต state
+                className="w-32 rounded-md px-2 outline-none focus:ring-1 focus:ring-blue-500"/>
+                <input 
+                type="number"
+                placeholder="Price"
+                value={newProductPrice} // ผูกค่า state กับ value ของ input
+                onChange={(e) => setNewProductPrice(e.target.value)} // อัปเดต state
+                className="w-32 rounded-md px-2 outline-none focus:ring-1 focus:ring-blue-500"/>
+                <div 
+                onClick={handleAddProduct}
+                className=" w-14 h-7 items-center bg-blue-500 flex justify-center rounded-md text-white cursor-pointer text-sm">Add</div>
+            </div>
+            <div className='bg-white px-4 rounded-lg shadow-md h-[740px] overflow-y-auto max-w-96 w-full slide'>
                 {products != undefined ? (
                     <ul>
                     {products.map((product) => (
                         <>
                             <li key={product.id} className='flex justify-between my-4 gap-2'>
-                            <div>{product.name}</div> <div>{product.price*32} บาท</div>
+                            <div>{product.name}</div> <div>{product.price} บาท</div>
                             </li>
                             <div className='w-full h-[1px] bg-slate-300'></div>
                         </>
@@ -155,7 +191,7 @@ export default function ExamplePage( ) {
             className="flex w-32 justify-center h-10 rounded-md bg-gray-500 text-white items-center cursor-pointer">Reset</div>
         </div>
         <div>
-        <h1 className="my-5 text-xl font-bold">---</h1>
+        <h1 className="my-5 text-xl font-bold">{title}</h1>
             <div className='bg-white px-4 rounded-lg shadow-md h-[800px] overflow-y-auto max-w-96 w-full slide'>
                 {result != null ? 
                 (isChecked?(
@@ -171,7 +207,7 @@ export default function ExamplePage( ) {
                                 <div key={idx}>
                                 <li className="flex justify-between my-4 gap-2">
                                     <div>{item.name}</div>
-                                    <div>{item.price * 32} บาท</div>
+                                    <div>{item.price} บาท</div>
                                 </li>
                                 <div className="w-full h-[1px] bg-slate-300"></div>
                                 </div>
@@ -185,7 +221,7 @@ export default function ExamplePage( ) {
                     {result.sortedArray.map((item, index) => (
                         <>
                             <li key={index} className='flex justify-between my-4 gap-2'>
-                            <div>{item.name}</div> <div>{item.price*32} บาท</div>
+                            <div>{item.name}</div> <div>{item.price} บาท</div>
                             </li>
                             <div className='w-full h-[1px] bg-slate-300'></div>
                         </>

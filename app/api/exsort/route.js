@@ -42,13 +42,18 @@ export async function POST(req) {
   
     // ใส่ข้อมูลลงใน Buckets ตามราคา
     namesAndPrices.forEach(item => {
-      const index = Math.floor((item.price - min) / bucketSize);
-      // ตรวจสอบ index เพื่อให้มั่นใจว่าอยู่ในช่วงที่ถูกต้อง
-      if (index >= 0 && index < numBuckets) {
-        buckets[index].push(item);
-      }
-    });
+        let index = Math.floor((item.price - min) / bucketSize);
   
+        // จำกัด index ให้อยู่ในช่วงที่ถูกต้อง (0 ถึง numBuckets - 1)
+        if (index >= numBuckets) {
+          index = numBuckets - 1; // หาก index เกินให้ใส่ bucket สุดท้าย
+        }
+  
+        if (index >= 0 && index < numBuckets) {
+          buckets[index].push(item);
+        }
+      });
+      
     // เก็บข้อมูลของแต่ละ Bucket ก่อนการเรียง
     const bucketDetails = buckets.map(bucket => ({
       beforeSort: bucket.slice(), // ก่อนเรียง

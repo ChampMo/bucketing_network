@@ -1,4 +1,4 @@
-const products = [
+const productsD = [
     { name: 'Wireless Keyboard', price: 550 },
     { name: 'Gaming Mouse', price: 450 },
     { name: 'LED Desk Lamp', price: 299 },
@@ -64,7 +64,7 @@ const products = [
     { name: 'Smartphone Gimbal', price: 3500 },
     { name: 'VR Headset', price: 4000 },
     { name: 'Noise-Reducing Earplugs', price: 200 },
-    { name: '64GB MicroSD Card', price: 450 },
+    { name: 'MicroSD Card 64GB', price: 450 },
     { name: 'External SSD 1TB', price: 2800 },
     { name: 'Smart TV Box', price: 1500 },
     { name: 'Keyboard and Mouse Combo', price: 700 },
@@ -90,7 +90,7 @@ const products = [
     { name: 'Microwave Oven', price: 3500 },
     { name: 'Air Fryer', price: 4000 },
     { name: 'Washing Machine (Mini)', price: 5500 },
-    { name: '4K Smart TV 50"', price: 8000 },
+    { name: 'Smart TV 50"', price: 8000 },
     { name: 'Wall-Mounted Fan', price: 800 },
     { name: 'Portable Air Cooler', price: 2500 },
     { name: 'Smart Refrigerator', price: 9000 },
@@ -100,5 +100,12 @@ const products = [
     { name: 'Electric Grill', price: 1800 },
     { name: 'Dehumidifier', price: 4500 },
 ];
+
+const exchangeRate = 32; // อัตราแลกเปลี่ยนเป็นบาท
+
+const products = productsD.map(productsD => ({
+  ...productsD,
+  price: productsD.price * exchangeRate, // คูณราคาเดิมด้วยอัตราแลกเปลี่ยน
+}));
 
 export default products;
