@@ -9,11 +9,11 @@ export async function POST(req) {
     }
 
     // เรียกใช้ Bucketing Sort
-    const { sortedWords, bucketDetails } = await bucketSort(array);
+    const { sortedArray, bucketDetails } = await bucketSort(array);
 
     // ส่งผลลัพธ์กลับ
     return new Response(
-      JSON.stringify({ sortedWords, bucketDetails }),
+      JSON.stringify({ sortedArray, bucketDetails }),
       { status: 200 }
     );
   } catch (err) {
@@ -46,7 +46,7 @@ async function bucketSort(array) {
   console.log(bucketDetails);
   // รวมผลลัพธ์จากทุก Bucket
   return {
-    sortedWords: buckets.flat(),
+    sortedArray: buckets.flat(),
     bucketDetails
   };
 }
