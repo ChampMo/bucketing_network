@@ -12,7 +12,7 @@ export default function ExamplePage( ) {
         // ดึงข้อมูลจาก API
         const fetchProducts = async () => {
           try {
-            const response = await fetch("/api/exsort");
+            const response = await fetch("/api/data");
             const data = await response.json();
             if (data.success) {
             console.log(data.data);
@@ -29,18 +29,23 @@ export default function ExamplePage( ) {
       <div className="flex justify-center min-h-screen bg-gray-100">
         <div>
             <h1>Products</h1>
-            {/* ตรวจสอบว่า products มีข้อมูลหรือไม่ */}
-            {products != undefined ? (
-                <ul>
-                {products.map((product) => (
-                    <li key={product.id}>
-                    {product.name} - {product.price*32} บาท
-                    </li>
-                ))}
-                </ul>
-            ) : (
-                <p>Loading...</p> // แสดงข้อความขณะรอข้อมูล
-            )}
+            <div className='bg-white p-4 rounded-lg shadow-md h-[800px] overflow-y-auto w-96'>
+                {products != undefined ? (
+                    <ul>
+                    {products.map((product) => (
+                        <>
+                            <li key={product.id} className='flex justify-between my-4'>
+                            <div>{product.name}</div> <div>{product.price*32} บาท</div>
+                            </li>
+                            <div className='w-full h-[1px] bg-slate-300'></div>
+                        </>
+                    ))}
+                    </ul>
+                ) : (
+                    <p>Loading...</p> // แสดงข้อความขณะรอข้อมูล
+                )}
+            </div>
+            
         </div>
         <div>
             2
