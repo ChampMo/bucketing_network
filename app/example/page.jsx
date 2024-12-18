@@ -126,8 +126,14 @@ export default function ExamplePage( ) {
         
     return (
       <div className="flex justify-center min-h-screen px-5 bg-gray-100">
+        
         <div>
-            <h1 className="my-5 text-xl font-bold flex justify-between"> 
+            <h1 className="my-5 text-xl font-bold flex justify-between relative"> 
+            <div className="absolute left-[-100px] top-[-10px]">
+                <Link 
+                className="mt-2 text-xs p-2 w-20 h-8 flex items-center justify-center bg-orange-400 text-white rounded-md cursor-pointer pr-4"
+                href="/"><Icon icon="mingcute:left-fill" width="20" height="20" />Back</Link>
+            </div>
                 <div>Products</div>
                 <Icon onClick={handleshuffle()} 
                 className=" cursor-pointer" 
@@ -163,7 +169,7 @@ export default function ExamplePage( ) {
                     ))}
                     </ul>
                 ) : (
-                    <p className="w-40 flex justify-center mt-5">Loading...</p> // แสดงข้อความขณะรอข้อมูล
+                    <p className="w-40 flex justify-center mt-5 mx-auto">Loading...</p> // แสดงข้อความขณะรอข้อมูล
                 )}
             </div>
             
