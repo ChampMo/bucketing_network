@@ -70,7 +70,6 @@ export async function POST(req) {
       })
     );
   
-    // รวมผลลัพธ์จากทุก Bucket
     return {
       sortedArray: sortedBuckets.flat(),
       bucketDetails
