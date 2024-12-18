@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  api-exsort:
+    build: 
+      context: ./api/exsort
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./api/exsort:/app
+    command: [ "node", "route.js" ]
+
+  api-exsorttext:
+    build: 
+      context: ./api/exsorttext
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./api/exsorttext:/app
+    command: [ "node", "route.js" ]
+
+  api-sort:
+    build: 
+      context: ./api/sort  # ✅ ใช้ path ที่ถูกต้อง
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./api/sort:/app  # ✅ ใช้ path ที่ถูกต้อง
+    command: [ "node", "route.js" ]
+
+  api-sorttext:
+    build: 
+      context: ./api/sorttext  # ✅ ใช้ path ที่ถูกต้อง
+      dockerfile: Dockerfile
+    ports:
+      - "3004:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./api/sorttext:/app  # ✅ ใช้ path ที่ถูกต้อง
+    command: [ "node", "route.js" ]
+
