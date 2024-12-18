@@ -159,9 +159,9 @@ export default function ExamplePage( ) {
             <div className='bg-white px-4 rounded-lg shadow-md h-[740px] overflow-y-auto max-w-96 w-full slide'>
                 {products != undefined ? (
                     <ul>
-                    {products.map((product) => (
+                    {products.map((product,index) => (
                         <>
-                            <li key={product.id} className='flex justify-between my-4 gap-2'>
+                            <li key={index} className='flex justify-between my-4 gap-2'>
                             <div>{product.name}</div> <div>{product.price} บาท</div>
                             </li>
                             <div className='w-full h-[1px] bg-slate-300'></div>
