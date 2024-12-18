@@ -92,7 +92,7 @@ export default function Home() {
           <div>Before Sort:</div>
           {result.bucketDetails.map((bucket, index) => (
             <div key={index} className='flex items-center space-x-4 mb-2'>
-              <h4 className='w-16 shrink-0'>Bucket {index + 1}</h4>
+              <h4 className='w-20 shrink-0'>Bucket {index + 1}</h4>
               <p > {bucket.beforeSort.join(', ')}</p>
             </div>
           ))}
