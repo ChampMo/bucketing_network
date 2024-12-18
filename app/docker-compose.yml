@@ -27,25 +27,25 @@ services:
 
   api-sort:
     build: 
-      context: ./api/sort  # ✅ ใช้ path ที่ถูกต้อง
+      context: ./api/sort  
       dockerfile: Dockerfile
     ports:
       - "3003:3000"
     environment:
       - NODE_ENV=production
     volumes:
-      - ./api/sort:/app  # ✅ ใช้ path ที่ถูกต้อง
+      - ./api/sort:/app  
     command: [ "node", "route.js" ]
 
   api-sorttext:
     build: 
-      context: ./api/sorttext  # ✅ ใช้ path ที่ถูกต้อง
+      context: ./api/sorttext 
       dockerfile: Dockerfile
     ports:
       - "3004:3000"
     environment:
       - NODE_ENV=production
     volumes:
-      - ./api/sorttext:/app  # ✅ ใช้ path ที่ถูกต้อง
+      - ./api/sorttext:/app  
     command: [ "node", "route.js" ]
 
